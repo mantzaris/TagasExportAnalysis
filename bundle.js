@@ -4,7 +4,8 @@
 //https://www.npmjs.com/package/random-words npm install random-words
 
 const randomWords = require('random-words');
-
+console.log('TTTEEESSSTTT')
+console.log(randomWords({exactly: 5, maxLength: 4}))
 
 // create an array with nodes
 var nodes = new vis.DataSet([
@@ -12,7 +13,8 @@ var nodes = new vis.DataSet([
     {id: 2, label: 'Node 2'},
     {id: 3, label: 'Node 3'},
     {id: 4, label: 'Node 4'},
-    {id: 5, label: 'Node 5'}
+    {id: 5, label: 'Node 5'},
+    {id: 6, label: 'Node 6'}
 ]);
 
 // create an array with edges
@@ -20,7 +22,8 @@ var edges = new vis.DataSet([
     {from: 1, to: 3},
     {from: 1, to: 2},
     {from: 2, to: 4},
-    {from: 2, to: 5}
+    {from: 2, to: 5},
+    {from: 2, to: 6}
 ]);
 
 // create a network
