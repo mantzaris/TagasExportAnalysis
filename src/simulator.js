@@ -1,13 +1,21 @@
 
-function sim(nNodes=10, nEdges=10, networkName='mynetwork1') {
+function simulator(nNodes=10, nEdges=10, nEmotionDimension=2, networkName='mynetwork1') {
 
-    var emotionColorOptions = ["red", "orange", "green"];
+    // Hardcoding some colors to associate with clusters
+    var clusterColors = ["red", "blue", "green", "orange", "purple"];
+
+    var emotionList = []
+    for (var i = 0; i < nNodes; i++) {
+        emotionList.push(simulateEmotion(nEmotionDimension));
+    };
+
+    let emotions_clustered = cluster_emotions(emotionList)
 
     var nodeList = []
     for (var i = 0; i < nNodes; i++) {
         nodeList.push({id: i,
                        label: randomWords(),
-                       color: random_select(emotionColorOptions),
+                       color: clusterColors[emotions_clustered[i]], //random_select(clusterColors),
                     })
       }
 
@@ -16,11 +24,9 @@ function sim(nNodes=10, nEdges=10, networkName='mynetwork1') {
 
     var edgeList = []
     for (var i = 0; i < nEdges; i++) {
-        from_node = random_integer(min=0, max=nNodes)
-        to_node = 
         edgeList.push({from: random_integer(min=0, max=nNodes),
                        to: random_integer(min=0, max=nNodes),
-                    })
+                    });
       }
 
     // create an array with edges
@@ -31,9 +37,18 @@ function sim(nNodes=10, nEdges=10, networkName='mynetwork1') {
     // provide the data in the vis format
     var data = {
         nodes: nodes,
-        edges: edges
+        edges: edges,
+        emotions: emotionList,
     };
     var options = {};
 
     return {container, data, options}
+};
+
+function simulateEmotion(nEmotionDimension=2) {
+    var emotion_vec = [];
+    for (i=0; i<nEmotionDimension; i++) {
+        emotion_vec.push(random_float(min=0, max=1));
+    };
+    return emotion_vec;
 };
